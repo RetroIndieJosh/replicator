@@ -1,0 +1,3 @@
+- spawn replicators
+- directional gravity (to "walk" on walls)
+- aim with "stick" (aiming reticle)
