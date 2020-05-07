@@ -1,0 +1,3 @@
+[submodule "Assets/jmtools-core"]
+	path = Assets/jmtools-core
+	url = git@github.com:jmtools/jmtools-core.git
