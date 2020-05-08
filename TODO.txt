@@ -1,3 +1,4 @@
-- spawn replicators
 - directional gravity (to "walk" on walls)
 - aim with "stick" (aiming reticle)
+- magnetism: a force pulls together dormant pieces and reforms them
+- weapons: ARW causes pieces to fall in place while ballistics make them explode
