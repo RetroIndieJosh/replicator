@@ -12,6 +12,9 @@ CRITICAL (GAME FLOW)
 - sound: repli hit
 
 EXTRA
+- slow replis as they approach the camera? (speed up to catch up)
+- rotate so light is always on "top"
+- randomly lit sections
 - "close" (destroy) gate when no more spawns
 - slight adjustments to crosshair pos to account for inexact aiming
 - limit fire rate by limiting spawn time

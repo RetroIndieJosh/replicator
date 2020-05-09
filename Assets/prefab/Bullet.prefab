@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 770311971417522957}
   - component: {fileID: 2044167107579176877}
   - component: {fileID: 4727122928202437146}
+  - component: {fileID: -6498655320857687805}
+  - component: {fileID: -1088970281071767248}
   m_Layer: 10
   m_Name: Bullet
   m_TagString: Bullet
@@ -103,11 +105,59 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7687424197727522673}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-6498655320857687805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687424197727522673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac904bedd53b1b847ac79208e75b93f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1088970281071767248}
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_limitByTag: 1
+  m_targetTag: Enemy
+  m_onEnterCollision: 1
+  m_onExitCollision: 0
+  m_onStayCollision: 0
+  m_onEnterTrigger: 0
+  m_onExitTrigger: 0
+  m_onStayTrigger: 0
+--- !u!114 &-1088970281071767248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687424197727522673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54243ae2608bc64c93b7d153f7be35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_seconds: 0
+  m_destroyOnStart: 0
