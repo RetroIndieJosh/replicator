@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnStart: 1
-  m_velocity: {x: 0, y: 0, z: -7}
+  m_velocity: {x: 0, y: 0, z: -4}
   m_sineFrequencyY: 0
   m_useStopPosition: 0
   m_stopPosition: {x: 0, y: 0, z: 0}

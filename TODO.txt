@@ -1,4 +1,5 @@
-- directional gravity (to "walk" on walls)
 - aim with "stick" (aiming reticle)
 - magnetism: a force pulls together dormant pieces and reforms them
-- weapons: ARW causes pieces to fall in place while ballistics make them explode
+- score on screen
+- combo (every 5 gives +1 to multiplier)
+- hold to charge ARW wave (+1 shot every 10-combo, up to 3 loaded but one at a time)
