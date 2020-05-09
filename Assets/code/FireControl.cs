@@ -14,11 +14,15 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
             return;
 
         var bullet = GetComponent<Spawner>().SpawnNext();
+        var origin = transform.position + transform.forward * Camera.main.nearClipPlane * 1.1f;
+        //var origin = transform.position - Vector3.forward * 2f;
         var dir = transform.forward;
         bullet.GetComponent<Rigidbody>().velocity = dir.normalized * m_speed;
 
         bullet.transform.rotation = transform.rotation;
         bullet.transform.Rotate(Vector3.right, 90f);
+
+        bullet.transform.position = origin;
 
         Debug.Log($"Fire {dir}");
     }

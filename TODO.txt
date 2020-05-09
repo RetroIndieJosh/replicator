@@ -12,7 +12,8 @@ CRITICAL (GAME FLOW)
 - sound: repli hit
 
 EXTRA
-- shoot from reticle (set initial position for spawned bullet)
+- "close" (destroy) gate when no more spawns
+- slight adjustments to crosshair pos to account for inexact aiming
 - limit fire rate by limiting spawn time
 - combo (every 5 gives +1 to multiplier)
 - auto roll replis to make it look like they're moving
