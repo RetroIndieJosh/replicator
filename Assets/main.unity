@@ -1601,6 +1601,7 @@ GameObject:
   - component: {fileID: 1763976747}
   - component: {fileID: 1763976746}
   - component: {fileID: 1763976748}
+  - component: {fileID: 1763976749}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1736,6 +1737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85f41374a747e47b37c9867203f389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_speed: {x: 0.5, y: 0.5}
   m_invertY: 1
   m_maxAngle: {x: 40, y: 40}
 --- !u!114 &1763976747
@@ -1760,6 +1762,79 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37bf5865af9561248a9300399427b84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 10
+--- !u!114 &1763976749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763976739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c7418a5dc09124a8623d1f4db0582d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_targetList:
+  - {fileID: 7687424197727522673, guid: ef81c8df8555ce54584e1807578ee8ee, type: 3}
+  m_maxAtOnce: 100
+  m_maxTotal: 0
+  m_spawnRadius: 0
+  m_secBetweenSpawns: 0
+  m_initialDelaySec: 0
+  m_spawnVelocity: {x: 0, y: 0, z: 10}
+--- !u!1 &1973885111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3174861514744964122, guid: 5c8b79526580b5141a510e84ccd73294,
+    type: 3}
+  m_PrefabInstance: {fileID: 3174861514614043708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1973885113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973885111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac904bedd53b1b847ac79208e75b93f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1973885114}
+        m_MethodName: Clone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_limitByTag: 1
+  m_targetTag: MainCamera
+  m_onEnterCollision: 0
+  m_onExitCollision: 0
+  m_onStayCollision: 0
+  m_onEnterTrigger: 0
+  m_onExitTrigger: 1
+  m_onStayTrigger: 0
+--- !u!114 &1973885114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3174861514744964116, guid: 5c8b79526580b5141a510e84ccd73294,
+    type: 3}
+  m_PrefabInstance: {fileID: 3174861514614043708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973885111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb195358f8a80d4ea5e8d6a4cf3f236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2134322832
@@ -1833,6 +1908,7 @@ MonoBehaviour:
   m_spawnRadius: 4
   m_secBetweenSpawns: 1.5
   m_initialDelaySec: 5
+  m_spawnVelocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &3174861514614043708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1913,5 +1989,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3174861514744964117, guid: 5c8b79526580b5141a510e84ccd73294, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c8b79526580b5141a510e84ccd73294, type: 3}

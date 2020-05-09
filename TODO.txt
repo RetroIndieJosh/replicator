@@ -1,5 +1,45 @@
-- aim with "stick" (aiming reticle)
-- magnetism: a force pulls together dormant pieces and reforms them
-- score on screen
+CRITICAL (GAME FLOW)
+- title screen
+- option: y-invert
+- credits
+- lose condition: too many get past (see extra for more advanced)
+- next wave condition: # spawned and all dead/past
+- points for each kill/wave
+- spawn more each wave (more quickly? move faster?)
+- score display
+- high score system
+- music (loop)
+- sound: repli hit
+
+EXTRA
+- shoot from reticle (set initial position for spawned bullet)
+- limit fire rate by limiting spawn time
 - combo (every 5 gives +1 to multiplier)
-- hold to charge ARW wave (+1 shot every 10-combo, up to 3 loaded but one at a time)
+- auto roll replis to make it look like they're moving
+- flash when repli hit
+- power up ARW wave (+1 shot every 10-combo, up to 3 loaded but one at a time)
+        - reuse water texture but brighter/more translucent (with a light?)
+        - repli pieces drop (0 explode force); need Explode(float force)
+- sound: ARW wave
+- end of wave, turn around and go through end gate (animated)
+- sound: go through gate
+- splitter repli: when hit, splits into two smaller ones
+- revival: a force collecting dormant pieces to reform a repli
+- queen: "boss" at the gate with a countdown to destroy
+- option: stick/mouse sensitivity
+- options: volume
+- "second chance" mechanic to turn around and shoot any that got past
+        - player-controlled turnaround: will need to draw more hall behind
+        - OR add those that get past to queen (speed up gate shutdown)
+- sound: queen draining gate
+- sound: gate deactivated
+- better repli model
+- gun model
+- better gate model
+- more details in halls
+
+TITLE
+- Zero Escape
+- No Escape
+- Duplicators
+- these are all crap

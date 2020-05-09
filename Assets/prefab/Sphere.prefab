@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: -1783342111983710483}
   - component: {fileID: -6858431680887062625}
   - component: {fileID: -4571036805631176571}
-  m_Layer: 0
+  - component: {fileID: -932057228343021313}
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,3 +181,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_targetTag: Wall
   m_checkRadius: 500
+--- !u!114 &-932057228343021313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126520056086943155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac904bedd53b1b847ac79208e75b93f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3126520056086943182}
+        m_MethodName: Explode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_limitByTag: 1
+  m_targetTag: Bullet
+  m_onEnterCollision: 1
+  m_onExitCollision: 0
+  m_onStayCollision: 0
+  m_onEnterTrigger: 0
+  m_onExitTrigger: 0
+  m_onStayTrigger: 0
