@@ -125,4 +125,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fromCamera: 1
   m_referenceTransform: {fileID: 0}
-  m_maxDistance: 40
+  m_maxDistance: 80

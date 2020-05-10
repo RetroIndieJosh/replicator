@@ -4,12 +4,11 @@ CRITICAL (GAME FLOW)
 - credits
 - lose condition: too many get past (see extra for more advanced)
 - next wave condition: # spawned and all dead/past
-- points for each kill/wave
 - spawn more each wave (more quickly? move faster?)
-- score display
 - high score system
 - music (loop)
 - sound: repli hit
+- destroy pieces when count too high
 
 EXTRA
 - slow replis as they approach the camera? (speed up to catch up)
