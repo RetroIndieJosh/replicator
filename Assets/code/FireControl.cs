@@ -31,8 +31,6 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
         bullet.transform.Rotate(Vector3.right, 90f);
 
         bullet.transform.position = origin;
-
-        Debug.Log($"Fire {dir}");
     }
 
     private void OnDrawGizmos() {

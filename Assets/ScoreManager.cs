@@ -34,6 +34,7 @@ public class ScoreManager : Singleton<ScoreManager>
     private int m_enemyCount = 0;
     private bool m_allSpawned = false;
     private int m_wave = 0;
+    private bool m_nextWaveStarting = false;
 
     public void AllSpawned() {
         m_allSpawned = true;
@@ -72,30 +73,51 @@ public class ScoreManager : Singleton<ScoreManager>
         m_wave = 0;
     }
 
+    private float m_timeSinceWaveEndSec = 0f;
+    private bool m_isGameOver = false;
+
     private void Update() {
-        var gamepad = Gamepad.current;
-        var keyboard = Keyboard.current;
-        if ((keyboard != null && keyboard.rKey.isPressed) ||
-            (gamepad != null && gamepad.aButton.IsPressed())) { 
-            Time.timeScale = 1f;
-            StartWave(true);
+        if(m_nextWaveStarting) {
+            m_timeSinceWaveEndSec += Time.unscaledDeltaTime;
+            if (m_timeSinceWaveEndSec > 2f)
+                StartWave();
+        } else if (m_allSpawned && m_enemyCount == 0) {
+            m_nextWaveStarting = true;
+            ++m_wave;
+            Time.timeScale = 0f;
         }
 
-        m_scoreDisplay.text = $"{m_score} / Wave {m_wave} / {m_charge} Charge / {m_enemiesThrough} Through / {m_enemyCount} Remain";
-        if (m_allSpawned && m_enemyCount == 0)
-            StartWave();
+        if (m_isGameOver) {
+            var gamepad = Gamepad.current;
+            var keyboard = Keyboard.current;
+            if ((keyboard != null && keyboard.rKey.isPressed) ||
+                (gamepad != null && gamepad.aButton.IsPressed()))
+                StartWave(true);
+        }
+
+        m_scoreDisplay.text = $"{m_score} HI {m_highScore} / Wave {m_wave} / {m_charge} Charge / {m_enemiesThrough} Through / {m_enemyCount} Remain";
     }
 
+    private int m_highScore = 0;
+
     private void GameOver() {
+        m_isGameOver = true;
         Debug.Log("Game over");
         Time.timeScale = 0f;
+        if (m_score >= m_highScore) 
+            PlayerPrefs.SetInt("High Score", m_score);
     }
 
     private void StartWave(bool a_isFirst = false) {
-        if (a_isFirst)
-            m_wave = 0;
-        else
-            ++m_wave;
+        m_nextWaveStarting = false;
+        Time.timeScale = 1f;
+
+        if (a_isFirst) {
+            m_score = 0;
+            m_charge = 0;
+            m_enemiesThrough = 0;
+            m_highScore = PlayerPrefs.GetInt("High Score");
+        } 
 
         Debug.Log("Next wave");
         Camera.main.transform.position = m_startPos;

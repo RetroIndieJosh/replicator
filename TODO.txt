@@ -1,15 +1,17 @@
 CRITICAL (GAME FLOW)
-- clear all pieces on new wave
-- high score system
+- option: reset high score
+- credits
 - music (loop)
 - sound: repli hit
-- "next wave starting" message and delay before next wave
-- title screen
-- option: y-invert
-- option: adjust pieces per repli and pieces max
-- credits
 
 EXTRA
+- dump back to title after game over
+- esc in game back to title
+        - "return to menu y/n"
+- esc in title to quit
+        - "really want to quit y/n"
+- spawn hallways early so looking down at end doesn't reveal gap
+- "next wave starting" message 
 - destroy pieces when count too high
 - slow replis as they approach the camera? (speed up to catch up)
 - rotate so light is always on "top"
