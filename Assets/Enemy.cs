@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     private void Start() {
         GetComponent<Exploder3d>().OnExplode.AddListener(() => {
-            ScoreManager.instance.IncrementScore();
+            ScoreManager.instance.EnemyKilled();
         });
         ScoreManager.instance.IncrementEnemyCount();
     }

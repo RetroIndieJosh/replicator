@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_piecePrefab: {fileID: 4944833883004792084, guid: 01c3a5f740db70e4a83f02720ea7433e,
     type: 3}
-  m_pieceCount: 300
+  m_pieceCount: 50
   m_explosionForce: 100
   m_explosionRadius: 1
   OnExplode:

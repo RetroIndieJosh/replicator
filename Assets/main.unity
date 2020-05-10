@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &312119827
 Transform:
   m_ObjectHideFlags: 0
@@ -995,6 +995,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_seconds: 2
   m_destroyOnStart: 0
+--- !u!23 &1063726181 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 9485b0c79d11e2e4d0007da98d76c639,
+    type: 3}
+  m_PrefabInstance: {fileID: 326341886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1138661389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1138661390
 Transform:
   m_ObjectHideFlags: 0
@@ -1834,7 +1840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bf5865af9561248a9300399427b84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_wavePrefab: {fileID: 5680877117993960781, guid: 85ceeda1db71f57439876a2b3cd5f459,
+  m_energyWeaponPrefab: {fileID: 5680877117993960781, guid: 85ceeda1db71f57439876a2b3cd5f459,
     type: 3}
   m_speed: 35
 --- !u!114 &1763976749
@@ -1874,6 +1880,32 @@ MonoBehaviour:
   m_scoreDisplay: {fileID: 1993730902}
   m_scorePerKill: 1
   m_chargeForWave: 0
+  m_enemySpawner: {fileID: 2134322835}
+  m_onWaveEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1063726181}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 176359163}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1855579489 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4101664572754812408, guid: 5c8b79526580b5141a510e84ccd73294,
@@ -2220,9 +2252,31 @@ MonoBehaviour:
   m_onFinished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1063726179}
-        m_MethodName: Destroy
+      - m_Target: {fileID: 1063726181}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1763976750}
+        m_MethodName: AllSpawned
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 176359163}
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2238,6 +2292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4101664573141295139, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_cloneOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4101664573386961708, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
       propertyPath: m_Name

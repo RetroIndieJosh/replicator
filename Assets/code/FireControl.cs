@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class FireControl : MonoBehaviour, Controls.IFireActions
 {
-    [SerializeField] private GameObject m_wavePrefab = null;
+    [SerializeField] private GameObject m_energyWeaponPrefab = null;
     [SerializeField] private float m_speed = 10f;
 
     public void OnFire(InputAction.CallbackContext context) {
@@ -16,8 +16,8 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
 
         if (ScoreManager.instance.IsCharged) {
             ScoreManager.instance.ResetCharge();
-            Instantiate(m_wavePrefab, transform.position, m_wavePrefab.transform.rotation);
-            Debug.Log("Fire wave");
+            Instantiate(m_energyWeaponPrefab, transform.position, m_energyWeaponPrefab.transform.rotation);
+            Debug.Log("Fire energy weapon");
             return;
         }
 
