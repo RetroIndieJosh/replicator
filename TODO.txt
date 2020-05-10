@@ -9,6 +9,7 @@ CRITICAL (GAME FLOW)
 - music (loop)
 - sound: repli hit
 - destroy pieces when count too high
+- setting to adjust pieces per repli and pieces max
 
 EXTRA
 - slow replis as they approach the camera? (speed up to catch up)

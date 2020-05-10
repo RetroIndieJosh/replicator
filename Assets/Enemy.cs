@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Exploder3d))]
 public class Enemy : MonoBehaviour
 {
     private void Start() {
         GetComponent<Exploder3d>().OnExplode.AddListener(() => {
-            FindObjectOfType<ScoreManager>().IncrementScore();
+            ScoreManager.instance.IncrementScore();
         });
+        ScoreManager.instance.IncrementEnemyCount();
     }
 
     private void Update() {
