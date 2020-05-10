@@ -7,11 +7,19 @@ using UnityEngine.InputSystem;
 
 public class FireControl : MonoBehaviour, Controls.IFireActions
 {
+    [SerializeField] private GameObject m_wavePrefab = null;
     [SerializeField] private float m_speed = 10f;
 
     public void OnFire(InputAction.CallbackContext context) {
         if (context.started == false)
             return;
+
+        if (ScoreManager.instance.IsCharged) {
+            ScoreManager.instance.ResetCharge();
+            Instantiate(m_wavePrefab, transform.position, m_wavePrefab.transform.rotation);
+            Debug.Log("Fire wave");
+            return;
+        }
 
         var bullet = GetComponent<Spawner>().SpawnNext();
         var origin = transform.position + transform.forward * Camera.main.nearClipPlane * 1.1f;

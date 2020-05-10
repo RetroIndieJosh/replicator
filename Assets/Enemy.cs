@@ -9,4 +9,12 @@ public class Enemy : MonoBehaviour
             FindObjectOfType<ScoreManager>().IncrementScore();
         });
     }
+
+    private void Update() {
+        if (transform.position.z > Camera.main.transform.position.z)
+            return;
+
+        ScoreManager.instance.EnemyGotThrough();
+        Destroy(gameObject);
+    }
 }
