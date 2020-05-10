@@ -1,10 +1,9 @@
 CRITICAL (GAME FLOW)
-- lose condition: too many get past (see extra for more advanced) percentage?
+- clear all pieces on new wave
 - high score system
 - music (loop)
 - sound: repli hit
 - "next wave starting" message and delay before next wave
-- clear all pieces on new wave
 - title screen
 - option: y-invert
 - option: adjust pieces per repli and pieces max

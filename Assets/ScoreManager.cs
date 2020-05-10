@@ -104,6 +104,9 @@ public class ScoreManager : Singleton<ScoreManager>
         m_enemySpawner.MaxTotal = EnemyCountMax;
         m_onWaveEnd.Invoke();
 
+        foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
+            Destroy(piece);
+
         m_enemiesThrough = 0;
         m_enemyCount = 0;
         m_allSpawned = false;
