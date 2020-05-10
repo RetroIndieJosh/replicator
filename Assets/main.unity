@@ -1814,7 +1814,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: {x: 0.75, y: 0.42857146}
-  m_invertY: 1
   m_maxAngle: {x: 70, y: 40}
 --- !u!114 &1763976747
 MonoBehaviour:
@@ -1906,6 +1905,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  m_musicLayerList:
+  - {fileID: 8300000, guid: e0af283031a79c6459efb2aace91133b, type: 3}
+  - {fileID: 8300000, guid: 2fe196b87eb4e234da3ced5340d70561, type: 3}
+  - {fileID: 8300000, guid: 3e630d578d9efdc46a3a4f1395b212b9, type: 3}
   m_allowedPastCount: 5
   m_enemySpeedBase: 3.5
   m_enemySpeedDivider: 5

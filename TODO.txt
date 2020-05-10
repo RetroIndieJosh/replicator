@@ -1,10 +1,12 @@
 CRITICAL (GAME FLOW)
 - option: reset high score
 - credits
-- music (loop)
+- stop music on game over
 - sound: repli hit
 
 EXTRA
+- title music
+- game over music
 - dump back to title after game over
 - esc in game back to title
         - "return to menu y/n"

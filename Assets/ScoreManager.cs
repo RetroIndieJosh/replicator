@@ -14,6 +14,9 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private Spawner m_enemySpawner = null;
     [SerializeField] private UnityEvent m_onWaveEnd = new UnityEvent();
 
+    [Header("Music")]
+    [SerializeField] private List<AudioClip> m_musicLayerList = new List<AudioClip>();
+
     [Header("Waves")]
     [SerializeField] private int m_allowedPastCount = 5;
     [SerializeField] private float m_enemySpeedBase = 3.5f;
@@ -48,6 +51,12 @@ public class ScoreManager : Singleton<ScoreManager>
 
     public void IncrementEnemyCount() {
         ++m_enemyCount;
+
+        var enemyTotal = m_enemiesThrough + m_enemyCount;
+        var percent = (float)enemyTotal / m_enemySpawner.MaxTotal;
+        m_audioSourceList[0].volume = 1f;
+        m_audioSourceList[1].volume = Mathf.Min(1f, percent * 2f);
+        m_audioSourceList[2].volume = Mathf.Min(1f, (percent - 0.5f) * 2f);
     }
 
     public void EnemyGotThrough() {
@@ -71,12 +80,49 @@ public class ScoreManager : Singleton<ScoreManager>
         m_startPos = Camera.main.transform.position;
         StartWave(true);
         m_wave = 0;
+
+        foreach (var clip in m_musicLayerList) {
+            Debug.Log($"Create music layer {clip}");
+            var child = new GameObject();
+            var source = child.AddComponent<AudioSource>();
+            source.clip = clip;
+            source.loop = true;
+            source.Play();
+            source.volume = 0f;
+            child.transform.SetParent(transform);
+            child.name = $"Music Layer ({clip})";
+            m_audioSourceList.Add(source);
+        }
+        m_audioSourceList[0].volume = 1f;
     }
+
+    private List<AudioSource> m_audioSourceList = new List<AudioSource>();
 
     private float m_timeSinceWaveEndSec = 0f;
     private bool m_isGameOver = false;
 
+    [SerializeField] private float m_gameOverStopTimeSec = 5f;
+
     private void Update() {
+        if (m_isGameOver) {
+            m_scoreDisplay.text = $"GAME OVER / {m_score} HI {m_highScore} / Wave {m_wave}";
+            if (Time.timeScale > 0f) {
+                Time.timeScale = Mathf.Max(Time.timeScale - Time.unscaledDeltaTime / m_gameOverStopTimeSec, 0f);
+                foreach (var source in m_audioSourceList) {
+                    source.volume -= Time.unscaledDeltaTime / (m_gameOverStopTimeSec - 1);
+                    var pitchDown = 1 / m_gameOverStopTimeSec * Time.unscaledDeltaTime;
+                    source.pitch -= pitchDown;
+                }
+            }
+
+            var gamepad = Gamepad.current;
+            var keyboard = Keyboard.current;
+            if ((keyboard != null && keyboard.rKey.isPressed) ||
+                (gamepad != null && gamepad.aButton.IsPressed()))
+                StartWave(true);
+            return;
+        }
+
         if(m_nextWaveStarting) {
             m_timeSinceWaveEndSec += Time.unscaledDeltaTime;
             if (m_timeSinceWaveEndSec > 2f)
@@ -87,14 +133,6 @@ public class ScoreManager : Singleton<ScoreManager>
             Time.timeScale = 0f;
         }
 
-        if (m_isGameOver) {
-            var gamepad = Gamepad.current;
-            var keyboard = Keyboard.current;
-            if ((keyboard != null && keyboard.rKey.isPressed) ||
-                (gamepad != null && gamepad.aButton.IsPressed()))
-                StartWave(true);
-        }
-
         m_scoreDisplay.text = $"{m_score} HI {m_highScore} / Wave {m_wave} / {m_charge} Charge / {m_enemiesThrough} Through / {m_enemyCount} Remain";
     }
 
@@ -103,7 +141,6 @@ public class ScoreManager : Singleton<ScoreManager>
     private void GameOver() {
         m_isGameOver = true;
         Debug.Log("Game over");
-        Time.timeScale = 0f;
         if (m_score >= m_highScore) 
             PlayerPrefs.SetInt("High Score", m_score);
     }
