@@ -13,9 +13,20 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] private int m_chargeForWave = 10;
     [SerializeField] private Spawner m_enemySpawner = null;
     [SerializeField] private UnityEvent m_onWaveEnd = new UnityEvent();
+    [SerializeField] private float m_gameOverStopTimeSec = 5f;
 
     [Header("Music")]
+    [SerializeField] private bool m_enableMusic = true;
     [SerializeField] private List<AudioClip> m_musicLayerList = new List<AudioClip>();
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip m_launchSound = null;
+    [SerializeField] private AudioClip m_hitSound = null;
+    [SerializeField] private AudioClip m_clatterSound = null;
+
+    public AudioClip LaunchSound => m_launchSound;
+    public AudioClip HitSound => m_hitSound;
+    public AudioClip ClatterSound => m_clatterSound;
 
     [Header("Waves")]
     [SerializeField] private int m_allowedPastCount = 5;
@@ -39,6 +50,11 @@ public class ScoreManager : Singleton<ScoreManager>
     private int m_wave = 0;
     private bool m_nextWaveStarting = false;
 
+    private List<AudioSource> m_audioSourceList = new List<AudioSource>();
+
+    private float m_timeSinceWaveEndSec = 0f;
+    private bool m_isGameOver = false;
+
     public void AllSpawned() {
         m_allSpawned = true;
     }
@@ -51,6 +67,9 @@ public class ScoreManager : Singleton<ScoreManager>
 
     public void IncrementEnemyCount() {
         ++m_enemyCount;
+
+        if (m_enableMusic == false)
+            return;
 
         var enemyTotal = m_enemiesThrough + m_enemyCount;
         var percent = (float)enemyTotal / m_enemySpawner.MaxTotal;
@@ -81,6 +100,9 @@ public class ScoreManager : Singleton<ScoreManager>
         StartWave(true);
         m_wave = 0;
 
+        if (m_enableMusic == false)
+            return;
+
         foreach (var clip in m_musicLayerList) {
             Debug.Log($"Create music layer {clip}");
             var child = new GameObject();
@@ -95,13 +117,6 @@ public class ScoreManager : Singleton<ScoreManager>
         }
         m_audioSourceList[0].volume = 1f;
     }
-
-    private List<AudioSource> m_audioSourceList = new List<AudioSource>();
-
-    private float m_timeSinceWaveEndSec = 0f;
-    private bool m_isGameOver = false;
-
-    [SerializeField] private float m_gameOverStopTimeSec = 5f;
 
     private void Update() {
         if (m_isGameOver) {

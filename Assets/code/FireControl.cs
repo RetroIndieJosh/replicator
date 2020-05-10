@@ -14,6 +14,8 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
         if (context.started == false)
             return;
 
+        AudioSource.PlayClipAtPoint(ScoreManager.instance.LaunchSound, transform.position);
+
         if (ScoreManager.instance.IsCharged) {
             ScoreManager.instance.ResetCharge();
             Instantiate(m_energyWeaponPrefab, transform.position, m_energyWeaponPrefab.transform.rotation);

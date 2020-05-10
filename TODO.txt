@@ -1,9 +1,3 @@
-CRITICAL (GAME FLOW)
-- option: reset high score
-- credits
-- stop music on game over
-- sound: repli hit
-
 EXTRA
 - title music
 - game over music

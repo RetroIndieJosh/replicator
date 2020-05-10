@@ -1905,10 +1905,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  m_gameOverStopTimeSec: 5
+  m_enableMusic: 0
   m_musicLayerList:
   - {fileID: 8300000, guid: e0af283031a79c6459efb2aace91133b, type: 3}
   - {fileID: 8300000, guid: 2fe196b87eb4e234da3ced5340d70561, type: 3}
   - {fileID: 8300000, guid: 3e630d578d9efdc46a3a4f1395b212b9, type: 3}
+  m_launchSound: {fileID: 8300000, guid: 40d263b585500dd42b7318fd8c6b214a, type: 3}
+  m_hitSound: {fileID: 8300000, guid: 5fa527fcd15019d48b4b2c595596e47b, type: 3}
+  m_clatterSound: {fileID: 8300000, guid: f50f1b92c9bd1f54682cb83dbbfffa9d, type: 3}
   m_allowedPastCount: 5
   m_enemySpeedBase: 3.5
   m_enemySpeedDivider: 5
