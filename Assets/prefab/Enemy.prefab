@@ -321,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveOnStart: 1
   m_velocityMin: {x: 0, y: 0, z: -5}
-  m_velocityMax: {x: 0, y: 0, z: -8}
+  m_velocityMax: {x: 0, y: 0, z: 0}
   m_sineFrequencyY: 0
   m_useStopPosition: 0
   m_stopPosition: {x: 0, y: 0, z: 0}
@@ -420,6 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76434b55d1c936143a06ee779d76ce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_minSpeed: 3.5
+  m_speedDistanceDivider: 5
 --- !u!114 &5286097091098376255
 MonoBehaviour:
   m_ObjectHideFlags: 0

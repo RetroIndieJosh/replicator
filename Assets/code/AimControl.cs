@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class AimControl : MonoBehaviour, Controls.IAimActions
 {
     [SerializeField] private Vector2 m_speed = Vector2.one * 0.5f;
-    [SerializeField] private bool m_invertY = true;
     [SerializeField] private Vector2 m_maxAngle = Vector2.one * 90f;
 
+    private bool m_invertY = true;
     private Vector2 m_turnSpeed = Vector2.zero;
 
     public void OnAim(InputAction.CallbackContext context) {
@@ -25,6 +25,7 @@ public class AimControl : MonoBehaviour, Controls.IAimActions
             return;
         }
         controller.Controls.Aim.SetCallbacks(this);
+        m_invertY = PlayerPrefs.GetInt("Invert Y") == 1;
     }
 
     // this whole x/y thing is very confusing but it's all correct, knowing

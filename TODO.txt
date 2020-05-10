@@ -1,17 +1,17 @@
 CRITICAL (GAME FLOW)
-- title screen
-- option: y-invert
-- credits
-- lose condition: too many get past (see extra for more advanced)
-- next wave condition: # spawned and all dead/past
-- spawn more each wave (more quickly? move faster?)
+- lose condition: too many get past (see extra for more advanced) percentage?
 - high score system
 - music (loop)
 - sound: repli hit
-- destroy pieces when count too high
-- setting to adjust pieces per repli and pieces max
+- "next wave starting" message and delay before next wave
+- clear all pieces on new wave
+- title screen
+- option: y-invert
+- option: adjust pieces per repli and pieces max
+- credits
 
 EXTRA
+- destroy pieces when count too high
 - slow replis as they approach the camera? (speed up to catch up)
 - rotate so light is always on "top"
 - randomly lit sections
@@ -21,10 +21,9 @@ EXTRA
 - combo (every 5 gives +1 to multiplier)
 - auto roll replis to make it look like they're moving
 - flash when repli hit
-- power up ARW wave (+1 shot every 10-combo, up to 3 loaded but one at a time)
-        - reuse water texture but brighter/more translucent (with a light?)
-        - repli pieces drop (0 explode force); need Explode(float force)
-- sound: ARW wave
+- better looking ARW
+        - rotating electricity translucent
+- sound: ARW 
 - end of wave, turn around and go through end gate (animated)
 - sound: go through gate
 - splitter repli: when hit, splits into two smaller ones

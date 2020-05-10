@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -344,7 +344,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 0.9009434, a: 1}
   m_Intensity: 3
   m_Range: 60
-  m_SpotAngle: 25
+  m_SpotAngle: 60
   m_InnerSpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
@@ -1046,7 +1046,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 0.9009434, a: 1}
   m_Intensity: 3
   m_Range: 60
-  m_SpotAngle: 40
+  m_SpotAngle: 80
   m_InnerSpotAngle: 4
   m_CookieSize: 10
   m_Shadows:
@@ -1858,7 +1858,7 @@ MonoBehaviour:
   m_spawnParent: {fileID: 0}
   m_targetList:
   - {fileID: 7687424197727522673, guid: ef81c8df8555ce54584e1807578ee8ee, type: 3}
-  m_maxTotal: 0
+  MaxTotal: 10
   m_spawnRadius: 0
   m_secBetweenSpawns: 0
   m_initialDelaySec: 0
@@ -1879,7 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_scoreDisplay: {fileID: 1993730902}
   m_scorePerKill: 1
-  m_chargeForWave: 0
+  m_chargeForWave: 5
   m_enemySpawner: {fileID: 2134322835}
   m_onWaveEnd:
     m_PersistentCalls:
@@ -1906,6 +1906,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  m_allowedPastCount: 5
+  m_enemySpeedBase: 3.5
+  m_enemySpeedDivider: 5
+  m_enemySpeedInc: 0.3
+  m_spawnCountBase: 10
+  m_spawnCountInc: 1.5
 --- !u!1 &1855579489 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4101664572754812408, guid: 5c8b79526580b5141a510e84ccd73294,
@@ -2245,10 +2251,10 @@ MonoBehaviour:
   m_spawnParent: {fileID: 0}
   m_targetList:
   - {fileID: 8201940689955069764, guid: bd36a8f7a2bedab49a2c83580293ceea, type: 3}
-  m_maxTotal: 20
+  MaxTotal: 10
   m_spawnRadius: 4
-  m_secBetweenSpawns: 1.5
-  m_initialDelaySec: 3
+  m_secBetweenSpawns: 1
+  m_initialDelaySec: 4
   m_onFinished:
     m_PersistentCalls:
       m_Calls:
@@ -2292,6 +2298,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4101664572754812408, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664572905928685, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4101664573141295139, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
       propertyPath: m_cloneOnce
@@ -2356,6 +2372,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664574299038119, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664574480117380, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c8b79526580b5141a510e84ccd73294, type: 3}
