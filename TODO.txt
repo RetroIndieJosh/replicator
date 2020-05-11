@@ -1,12 +1,10 @@
 CRITICAL
-- every wave the same amount of time, with time between spawns adjusted accordingly
 - player info: how to play game
-- player info: did I get a high score? on game over & center game over text
-- implement sensitivity options
 - dump back to title after game over
 - wave transition: fade? light?
 - disable energy weapon past gate
 - don't charge with wave
+- don't go to next wave if game over
 
 EXTRA
 - sound: click for when trying to fire too quickly

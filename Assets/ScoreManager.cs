@@ -20,6 +20,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI m_gameOverDisplay = null;
+    [SerializeField] private TextMeshProUGUI m_waveDisplay = null;
     [SerializeField] private TextMeshProUGUI m_scoreDisplay = null;
 
     [Header("Music")]
@@ -79,9 +80,16 @@ public class ScoreManager : Singleton<ScoreManager>
         m_allSpawned = true;
     }
 
+    public void ReadSettings() {
+        m_maxPieces = PlayerPrefs.GetInt("Max Pieces");
+    }
+
+    public void IncrementCharge() {
+        ++m_charge;
+    }
+
     public void EnemyKilled() {
         m_score += m_scorePerKill;
-        ++m_charge;
         --m_enemyCount;
     }
 
@@ -111,6 +119,7 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
     private void Start() {
+        ReadSettings();
         m_gameOverDisplay.enabled = false; 
         m_maxPieces = PlayerPrefs.GetInt("Max Pieces");
 
@@ -168,6 +177,7 @@ public class ScoreManager : Singleton<ScoreManager>
             return;
         IsPaused = false;
 
+        ReadSettings();
         Time.timeScale = 1f;
         m_pauseMenuOp = null;
         m_scoreDisplay.enabled = true;
@@ -193,6 +203,11 @@ public class ScoreManager : Singleton<ScoreManager>
             return;
         }
 
+        var health = Mathf.Max(0, m_allowedPastCount - m_enemiesThrough);
+        var chargePercent = Mathf.FloorToInt(m_charge * 100f / m_chargeForWave);
+        m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore}) / "
+            + $"Health {health} / "
+            + (chargePercent < 100 ? $"Charge {chargePercent}%" : "CHARGED");
 
         if (IsGameOver) {
             if (Time.timeScale > 0f) {
@@ -211,22 +226,23 @@ public class ScoreManager : Singleton<ScoreManager>
 
         if(m_nextWaveStarting) {
             m_timeSinceWaveEndSec += Time.unscaledDeltaTime;
-            if (m_timeSinceWaveEndSec > 2f)
+            if (m_timeSinceWaveEndSec > 2f) {
+                m_timeSinceWaveEndSec = 0f;
                 StartWave();
+            }
         } else if (m_allSpawned && m_enemyCount == 0) {
             m_nextWaveStarting = true;
+            foreach (var enemy in FindObjectsOfType<Enemy>())
+                Destroy(enemy);
             ++m_wave;
+            m_waveDisplay.text = $"Wave {m_wave} starting";
             Time.timeScale = 0f;
         }
-
-        var health = 100 - Mathf.FloorToInt(m_enemiesThrough * 100f / m_allowedPastCount);
-        var chargePercent = Mathf.FloorToInt(m_charge * 100f / m_chargeForWave);
-        m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore}) / "
-            + $"Health {health} / "
-            + (chargePercent < 100 ? $"Charge {chargePercent}" : "CHARGED");
     }
 
     private void GameOver() {
+        if (IsGameOver) return;
+
         IsGameOver = true;
         Debug.Log("Game over");
         m_gameOverDisplay.enabled = true;
@@ -238,6 +254,7 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
     private void StartWave(bool a_isFirst = false) {
+        m_waveDisplay.text = "";
         m_nextWaveStarting = false;
         Time.timeScale = 1f;
 

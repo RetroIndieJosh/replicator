@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 358890955654045746}
   - component: {fileID: -104323481019618664}
   - component: {fileID: 8919098864757183094}
+  - component: {fileID: 7523014379346829395}
   m_Layer: 10
   m_Name: Bullet
   m_TagString: Bullet
@@ -142,6 +143,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7523014379346829395}
+        m_MethodName: DoIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_limitByTag: 1
   m_targetTag: Enemy
   m_onEnterCollision: 1
@@ -206,3 +218,15 @@ MonoBehaviour:
   GravityDirection: {x: 0, y: 4, z: 0}
   m_terminalVelocity: 53
   m_randomizeFromList: 0
+--- !u!114 &7523014379346829395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7687424197727522673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4eae11b61f0be419afc9d7be6e291d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
