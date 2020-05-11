@@ -4,11 +4,9 @@ CRITICAL
 - player info: did I get a high score? on game over & center game over text
 - implement sensitivity options
 - dump back to title after game over
-- limit fire rate by limiting spawn time
 - wave transition: fade? light?
 - disable energy weapon past gate
-- option: max pieces
-- implement max pieces
+- don't charge with wave
 
 EXTRA
 - sound: click for when trying to fire too quickly

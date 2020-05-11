@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void Update() {
-        if (transform.position.z < Camera.main.transform.position.z) {
+        if (transform.position.z < Camera.main.transform.position.z + 0.2f) {
             ScoreManager.instance.EnemyGotThrough();
             Destroy(gameObject);
             return;

@@ -9,7 +9,20 @@ public class AimControl : MonoBehaviour, Controls.IAimActions
     [SerializeField] private Vector2 m_maxAngle = Vector2.one * 90f;
 
     private bool m_invertY = true;
+    private Vector2 m_sensitivity = Vector2.one;
     private Vector2 m_turnSpeed = Vector2.zero;
+
+    public void ReadSettings() {
+        m_invertY = PlayerPrefs.GetInt("Invert Y") == 1;
+        m_sensitivity = new Vector2(
+            2f * PlayerPrefs.GetInt("Aim Sensitivity X") / 25f + 1f,
+            2f * PlayerPrefs.GetInt("Aim Sensitivity Y") / 25f + 1f
+        );
+        if (m_sensitivity.x < 0 || m_sensitivity.x == Mathf.Infinity)
+            m_sensitivity.x = 1f;
+        if (m_sensitivity.y < 0 || m_sensitivity.y == Mathf.Infinity)
+            m_sensitivity.y = 1f;
+    }
 
     public void OnAim(InputAction.CallbackContext context) {
         if (context.started || context.performed)
@@ -25,7 +38,7 @@ public class AimControl : MonoBehaviour, Controls.IAimActions
             return;
         }
         controller.Controls.Aim.SetCallbacks(this);
-        m_invertY = PlayerPrefs.GetInt("Invert Y") == 1;
+        ReadSettings();
     }
 
     // this whole x/y thing is very confusing but it's all correct, knowing
@@ -41,8 +54,8 @@ public class AimControl : MonoBehaviour, Controls.IAimActions
             //Debug.Log($"Turn {turn}");
             if (m_invertY)
                 turn.x = -turn.x;
-            x -= turn.x * m_speed.x;
-            y += turn.y * m_speed.y;
+            x -= turn.x * m_speed.x * m_sensitivity.y;
+            y += turn.y * m_speed.y * m_sensitivity.x;
         }
         x = ClampAngle(x, m_maxAngle.x);
         y = ClampAngle(y, m_maxAngle.y);

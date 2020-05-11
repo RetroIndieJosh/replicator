@@ -10,13 +10,17 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
+    [SerializeField] private int m_startWave = 0;
     [SerializeField] private bool m_pauseOnStart = false;
-    [SerializeField] private TextMeshProUGUI m_scoreDisplay = null;
     [SerializeField] private int m_scorePerKill = 1;
     [SerializeField] private int m_chargeForWave = 10;
     [SerializeField] private Spawner m_enemySpawner = null;
     [SerializeField] private UnityEvent m_onWaveEnd = new UnityEvent();
     [SerializeField] private float m_gameOverStopTimeSec = 5f;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI m_gameOverDisplay = null;
+    [SerializeField] private TextMeshProUGUI m_scoreDisplay = null;
 
     [Header("Music")]
     [SerializeField] private bool m_enableMusic = true;
@@ -30,12 +34,15 @@ public class ScoreManager : Singleton<ScoreManager>
     public AudioClip EnergyWeaponSound => m_energyWeaponSound;
 
     [Header("Waves")]
+    [SerializeField] private float m_waveLengthSec = 20f;
     [SerializeField] private int m_allowedPastCount = 5;
     [SerializeField] private float m_enemySpeedBase = 3.5f;
     [SerializeField] private float m_enemySpeedDivider = 5f;
     [SerializeField] private float m_enemySpeedInc = 0.1f;
     [SerializeField] private int m_spawnCountBase = 10;
     [SerializeField] private float m_spawnCountInc = 1.5f;
+
+    private readonly List<Piece> m_pieceList = new List<Piece>();
 
     public bool IsCharged => m_charge >= m_chargeForWave;
     public float EnemySpeed => m_enemySpeedBase + m_wave * m_enemySpeedInc;
@@ -57,6 +64,16 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private float m_timeSinceWaveEndSec = 0f;
     private int m_highScore = 0;
+    private int m_maxPieces = 100;
+
+    public void AddPiece( Piece a_piece) {
+        m_pieceList.Add(a_piece);
+        Debug.Log($"{m_pieceList.Count} pieces");
+        if(m_pieceList.Count > m_maxPieces) {
+            Destroy(m_pieceList[0].gameObject);
+            m_pieceList.RemoveAt(0);
+        }
+    }
 
     public void AllSpawned() {
         m_allSpawned = true;
@@ -94,6 +111,9 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
     private void Start() {
+        m_gameOverDisplay.enabled = false; 
+        m_maxPieces = PlayerPrefs.GetInt("Max Pieces");
+
         if(m_scoreDisplay == null ) {
             Debug.LogError("Score Manager must have score display");
             Destroy(this);
@@ -101,7 +121,6 @@ public class ScoreManager : Singleton<ScoreManager>
         }
         m_startPos = Camera.main.transform.position;
         StartWave(true);
-        m_wave = 0;
 
         if (m_enableMusic) {
             foreach (var clip in m_musicLayerList) {
@@ -176,7 +195,6 @@ public class ScoreManager : Singleton<ScoreManager>
 
 
         if (IsGameOver) {
-            m_scoreDisplay.text = $"GAME OVER / {m_score} HI {m_highScore} / Wave {m_wave}";
             if (Time.timeScale > 0f) {
                 Time.timeScale = Mathf.Max(Time.timeScale - Time.unscaledDeltaTime / m_gameOverStopTimeSec, 0f);
                 foreach (var source in m_audioSourceList) {
@@ -203,16 +221,20 @@ public class ScoreManager : Singleton<ScoreManager>
 
         var health = 100 - Mathf.FloorToInt(m_enemiesThrough * 100f / m_allowedPastCount);
         var chargePercent = Mathf.FloorToInt(m_charge * 100f / m_chargeForWave);
-        m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore})\n"
-            + $"Health {health}\n"
-            + $"Charge {chargePercent}";
+        m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore}) / "
+            + $"Health {health} / "
+            + (chargePercent < 100 ? $"Charge {chargePercent}" : "CHARGED");
     }
 
     private void GameOver() {
         IsGameOver = true;
         Debug.Log("Game over");
-        if (m_score >= m_highScore) 
+        m_gameOverDisplay.enabled = true;
+        m_gameOverDisplay.text = "GAME OVER";
+        if (m_score >= m_highScore) {
             PlayerPrefs.SetInt("High Score", m_score);
+            m_gameOverDisplay.text += " ~ New high score!";
+        }
     }
 
     private void StartWave(bool a_isFirst = false) {
@@ -220,6 +242,7 @@ public class ScoreManager : Singleton<ScoreManager>
         Time.timeScale = 1f;
 
         if (a_isFirst) {
+            m_wave = m_startWave;
             m_score = 0;
             m_charge = 0;
             m_enemiesThrough = 0;
@@ -229,8 +252,9 @@ public class ScoreManager : Singleton<ScoreManager>
         Debug.Log("Next wave");
         Camera.main.transform.position = m_startPos;
 
-        m_enemySpawner.ResetSpawner();
+        m_enemySpawner.SecBetweenSpawns = m_waveLengthSec / EnemyCountMax;
         m_enemySpawner.MaxTotal = EnemyCountMax;
+        m_enemySpawner.ResetSpawner();
         m_onWaveEnd.Invoke();
 
         foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
