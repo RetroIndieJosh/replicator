@@ -4,9 +4,10 @@ CRITICAL
 - player info: how to play game
 - player info: did I get a high score? on game over
 - implement sensitivity options
-- visual for charge weapon
 - dump back to title after game over
 - limit fire speed
+- wave transition: fade? light?
+- disable energy weapon past gate
 
 EXTRA
 - game over music

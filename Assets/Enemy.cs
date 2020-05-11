@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
         exploder.OnExplode.AddListener(() => {
             ScoreManager.instance.EnemyKilled();
             GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
             Destroy(this, 1f);
         });
 

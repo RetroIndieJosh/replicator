@@ -348,7 +348,7 @@ Light:
   m_InnerSpotAngle: 2
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1050,7 +1050,7 @@ Light:
   m_InnerSpotAngle: 4
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2316,10 +2316,25 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4101664573141295137, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664573141295137, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4101664573141295139, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
       propertyPath: m_cloneOnce
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664573141295139, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_cloneOffset.z
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 4101664573386961708, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
@@ -2339,7 +2354,7 @@ PrefabInstance:
     - target: {fileID: 4101664573386961710, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 4101664573386961710, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
@@ -2380,6 +2395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101664573386961710, guid: 5c8b79526580b5141a510e84ccd73294,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4101664574299038119, guid: 5c8b79526580b5141a510e84ccd73294,
         type: 3}
