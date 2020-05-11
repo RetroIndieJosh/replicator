@@ -1,12 +1,10 @@
 CRITICAL
 - player info: how to play game
 - dump back to title after game over
-- wave transition: fade? light?
 - disable energy weapon past gate
-- don't charge with wave
-- don't go to next wave if game over
 
 EXTRA
+- destroy nearest pieces first (not first spawned)
 - sound: click for when trying to fire too quickly
 - sound: charge down (got past)
 - sound: game over / music

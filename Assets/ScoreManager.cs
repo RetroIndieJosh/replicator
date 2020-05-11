@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices.WindowsRuntime;
+using JoshuaMcLean.JoshuaMcLean;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
@@ -230,7 +231,7 @@ public class ScoreManager : Singleton<ScoreManager>
                 m_timeSinceWaveEndSec = 0f;
                 StartWave();
             }
-        } else if (m_allSpawned && m_enemyCount == 0) {
+        } else if (m_allSpawned && m_enemyCount == 0 && IsGameOver == false) {
             m_nextWaveStarting = true;
             foreach (var enemy in FindObjectsOfType<Enemy>())
                 Destroy(enemy);
@@ -254,6 +255,9 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
     private void StartWave(bool a_isFirst = false) {
+        if (IsGameOver)
+            return;
+
         m_waveDisplay.text = "";
         m_nextWaveStarting = false;
         Time.timeScale = 1f;
@@ -274,8 +278,13 @@ public class ScoreManager : Singleton<ScoreManager>
         m_enemySpawner.ResetSpawner();
         m_onWaveEnd.Invoke();
 
-        foreach (var piece in GameObject.FindGameObjectsWithTag("Piece"))
-            Destroy(piece);
+        foreach (var piece in m_pieceList)
+            Destroy(piece.gameObject);
+        m_pieceList.Clear();
+        foreach (var wave in GameObject.FindGameObjectsWithTag("Wave"))
+            Destroy(wave);
+        foreach (var bullet in GameObject.FindGameObjectsWithTag("Bullet"))
+            Destroy(bullet);
 
         m_enemiesThrough = 0;
         m_enemyCount = 0;

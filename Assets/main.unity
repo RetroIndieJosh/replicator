@@ -2015,7 +2015,7 @@ MonoBehaviour:
   m_spawnParent: {fileID: 0}
   m_targetList:
   - {fileID: 7687424197727522673, guid: ef81c8df8555ce54584e1807578ee8ee, type: 3}
-  MaxTotal: 10
+  MaxTotal: 0
   m_spawnRadius: 0
   SecBetweenSpawns: 0.5
   m_autoSpawn: 0

@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
             ScoreManager.instance.EnemyKilled();
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             Destroy(this, m_lightTimeSec);
         });
 
