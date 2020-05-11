@@ -9,24 +9,26 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
 {
     [SerializeField] private GameObject m_energyWeaponPrefab = null;
     [SerializeField] private float m_speed = 10f;
+    [SerializeField] private float m_launchRotation = -10f;
 
     public void OnFire(InputAction.CallbackContext context) {
-        if (context.started == false)
+        if (ScoreManager.instance.IsGameOver || context.started == false)
             return;
-
-        AudioSource.PlayClipAtPoint(ScoreManager.instance.LaunchSound, transform.position);
 
         if (ScoreManager.instance.IsCharged) {
             ScoreManager.instance.ResetCharge();
             Instantiate(m_energyWeaponPrefab, transform.position, m_energyWeaponPrefab.transform.rotation);
             Debug.Log("Fire energy weapon");
+            AudioSource.PlayClipAtPoint(ScoreManager.instance.EnergyWeaponSound, transform.position);
             return;
         }
+
+        AudioSource.PlayClipAtPoint(ScoreManager.instance.LaunchSound, transform.position);
 
         var bullet = GetComponent<Spawner>().SpawnNext();
         var origin = transform.position + transform.forward * Camera.main.nearClipPlane * 1.1f;
         //var origin = transform.position - Vector3.forward * 2f;
-        var dir = transform.forward;
+        var dir = Quaternion.AngleAxis(m_launchRotation, Vector3.right) * transform.forward;
         bullet.GetComponent<Rigidbody>().velocity = dir.normalized * m_speed;
 
         bullet.transform.rotation = transform.rotation;

@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85f41374a747e47b37c9867203f389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: {x: 0.75, y: 0.42857146}
+  m_speed: {x: 2, y: 1}
   m_maxAngle: {x: 70, y: 40}
 --- !u!114 &1763976747
 MonoBehaviour:
@@ -1842,6 +1842,7 @@ MonoBehaviour:
   m_energyWeaponPrefab: {fileID: 5680877117993960781, guid: 85ceeda1db71f57439876a2b3cd5f459,
     type: 3}
   m_speed: 35
+  m_launchRotation: -10
 --- !u!114 &1763976749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1912,8 +1913,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2fe196b87eb4e234da3ced5340d70561, type: 3}
   - {fileID: 8300000, guid: 3e630d578d9efdc46a3a4f1395b212b9, type: 3}
   m_launchSound: {fileID: 8300000, guid: 40d263b585500dd42b7318fd8c6b214a, type: 3}
-  m_hitSound: {fileID: 8300000, guid: 5fa527fcd15019d48b4b2c595596e47b, type: 3}
-  m_clatterSound: {fileID: 8300000, guid: f50f1b92c9bd1f54682cb83dbbfffa9d, type: 3}
+  m_energyWeaponSound: {fileID: 8300000, guid: 2b8a6e88c2b843c40bfad5dee5ff4e6a, type: 3}
   m_allowedPastCount: 5
   m_enemySpeedBase: 3.5
   m_enemySpeedDivider: 5
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   - {fileID: 8201940689955069764, guid: bd36a8f7a2bedab49a2c83580293ceea, type: 3}
   MaxTotal: 10
   m_spawnRadius: 4
-  m_secBetweenSpawns: 1
+  m_secBetweenSpawns: 3
   m_initialDelaySec: 4
   m_onFinished:
     m_PersistentCalls:

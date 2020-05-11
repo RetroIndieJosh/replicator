@@ -21,12 +21,10 @@ public class ScoreManager : Singleton<ScoreManager>
 
     [Header("Sounds")]
     [SerializeField] private AudioClip m_launchSound = null;
-    [SerializeField] private AudioClip m_hitSound = null;
-    [SerializeField] private AudioClip m_clatterSound = null;
+    [SerializeField] private AudioClip m_energyWeaponSound = null;
 
     public AudioClip LaunchSound => m_launchSound;
-    public AudioClip HitSound => m_hitSound;
-    public AudioClip ClatterSound => m_clatterSound;
+    public AudioClip EnergyWeaponSound => m_energyWeaponSound;
 
     [Header("Waves")]
     [SerializeField] private int m_allowedPastCount = 5;
@@ -52,8 +50,11 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private List<AudioSource> m_audioSourceList = new List<AudioSource>();
 
+    public bool IsGameOver { get; private set; } = false;
+
     private float m_timeSinceWaveEndSec = 0f;
-    private bool m_isGameOver = false;
+    private int m_highScore = 0;
+
 
     public void AllSpawned() {
         m_allSpawned = true;
@@ -119,7 +120,7 @@ public class ScoreManager : Singleton<ScoreManager>
     }
 
     private void Update() {
-        if (m_isGameOver) {
+        if (IsGameOver) {
             m_scoreDisplay.text = $"GAME OVER / {m_score} HI {m_highScore} / Wave {m_wave}";
             if (Time.timeScale > 0f) {
                 Time.timeScale = Mathf.Max(Time.timeScale - Time.unscaledDeltaTime / m_gameOverStopTimeSec, 0f);
@@ -148,13 +149,13 @@ public class ScoreManager : Singleton<ScoreManager>
             Time.timeScale = 0f;
         }
 
-        m_scoreDisplay.text = $"{m_score} HI {m_highScore} / Wave {m_wave} / {m_charge} Charge / {m_enemiesThrough} Through / {m_enemyCount} Remain";
+        var health = 100 - Mathf.FloorToInt(m_enemiesThrough * 100f / m_allowedPastCount);
+        m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore})\n"
+            + $"{health}%" + (m_charge > m_chargeForWave ? "CHARGED" : "");
     }
 
-    private int m_highScore = 0;
-
     private void GameOver() {
-        m_isGameOver = true;
+        IsGameOver = true;
         Debug.Log("Game over");
         if (m_score >= m_highScore) 
             PlayerPrefs.SetInt("High Score", m_score);

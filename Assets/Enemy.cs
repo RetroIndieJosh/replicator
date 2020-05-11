@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour
         var exploder = GetComponent<Exploder3d>();
         exploder.PieceCount = Mathf.Max(PlayerPrefs.GetInt("Piece Count"), 20);
         exploder.OnExplode.AddListener(() => {
-            AudioSource.PlayClipAtPoint(ScoreManager.instance.HitSound, transform.position);
             ScoreManager.instance.EnemyKilled();
+            GetComponent<MeshRenderer>().enabled = false;
+            Destroy(this, 1f);
         });
 
         ScoreManager.instance.IncrementEnemyCount();
