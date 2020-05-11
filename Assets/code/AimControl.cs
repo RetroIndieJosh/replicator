@@ -31,6 +31,9 @@ public class AimControl : MonoBehaviour, Controls.IAimActions
     // this whole x/y thing is very confusing but it's all correct, knowing
     // "x turn" means "turn on y axis" and vice versa
     private void Update() {
+        if (Time.timeScale == 0f || ScoreManager.instance.IsPaused)
+            return;
+
         var x = transform.rotation.eulerAngles.x;
         var y = transform.rotation.eulerAngles.y;
         if (m_turnSpeed.magnitude > Mathf.Epsilon) {

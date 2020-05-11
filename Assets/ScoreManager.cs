@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
@@ -101,25 +103,77 @@ public class ScoreManager : Singleton<ScoreManager>
         StartWave(true);
         m_wave = 0;
 
-        if (m_enableMusic == false)
-            return;
-
-        foreach (var clip in m_musicLayerList) {
-            Debug.Log($"Create music layer {clip}");
-            var child = new GameObject();
-            var source = child.AddComponent<AudioSource>();
-            source.clip = clip;
-            source.loop = true;
-            source.Play();
-            source.volume = 0f;
-            child.transform.SetParent(transform);
-            child.name = $"Music Layer ({clip})";
-            m_audioSourceList.Add(source);
+        if (m_enableMusic) {
+            foreach (var clip in m_musicLayerList) {
+                Debug.Log($"Create music layer {clip}");
+                var child = new GameObject();
+                var source = child.AddComponent<AudioSource>();
+                source.clip = clip;
+                source.loop = true;
+                source.Play();
+                source.volume = 0f;
+                child.transform.SetParent(transform);
+                child.name = $"Music Layer ({clip})";
+                m_audioSourceList.Add(source);
+            }
+            m_audioSourceList[0].volume = 1f;
         }
-        m_audioSourceList[0].volume = 1f;
+
+        Pause();
+    }
+
+    AsyncOperation m_pauseMenuOp = null;
+
+    public bool IsPaused { get; private set; } = false;
+
+    private bool m_pauseWasPressed = false;
+    private bool m_pausePressed = false;
+
+    public bool PausePressedAndReleased {
+        get {
+            m_pauseWasPressed = m_pausePressed;
+            m_pausePressed = (Gamepad.current != null && Gamepad.current.startButton.isPressed)
+               || (Keyboard.current != null && Keyboard.current.escapeKey.isPressed);
+            return m_pauseWasPressed && !m_pausePressed;
+        }
+    }
+
+    private bool FirePressed
+        => (Gamepad.current != null && Gamepad.current.aButton.isPressed)
+            || (Keyboard.current != null && Keyboard.current.spaceKey.isPressed);
+
+    // TODO move pause/unpause into IsPaused
+    private void Unpause() {
+        if (IsPaused == false)
+            return;
+        IsPaused = false;
+
+        Time.timeScale = 1f;
+        m_pauseMenuOp = null;
+        m_scoreDisplay.enabled = true;
+    }
+
+    private void Pause() {
+        if (IsPaused)
+            return;
+        IsPaused = true;
+
+        m_scoreDisplay.enabled = false;
+        m_pauseMenuOp = SceneManager.LoadSceneAsync("title", LoadSceneMode.Additive);
+        Time.timeScale = 0f;
     }
 
     private void Update() {
+        if (m_pauseMenuOp == null) {
+            if (PausePressedAndReleased)
+                Pause();
+        } else {
+            if (m_pauseMenuOp.isDone && Time.timeScale > 0f)
+                Unpause();
+            return;
+        }
+
+
         if (IsGameOver) {
             m_scoreDisplay.text = $"GAME OVER / {m_score} HI {m_highScore} / Wave {m_wave}";
             if (Time.timeScale > 0f) {
@@ -131,10 +185,7 @@ public class ScoreManager : Singleton<ScoreManager>
                 }
             }
 
-            var gamepad = Gamepad.current;
-            var keyboard = Keyboard.current;
-            if ((keyboard != null && keyboard.rKey.isPressed) ||
-                (gamepad != null && gamepad.aButton.IsPressed()))
+            if (FirePressed)
                 StartWave(true);
             return;
         }

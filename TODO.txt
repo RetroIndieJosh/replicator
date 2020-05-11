@@ -8,20 +8,14 @@ CRITICAL
 - limit fire speed
 - wave transition: fade? light?
 - disable energy weapon past gate
+- option: max pieces
+- implement max pieces
 
 EXTRA
 - game over music
-- esc in game back to title
-        - "return to menu y/n"
-- esc in title to quit
-        - "really want to quit y/n"
-- spawn hallways early so looking down at end doesn't reveal gap
 - "next wave starting" message 
-- destroy pieces when count too high
-- slow replis as they approach the camera? (speed up to catch up)
 - rotate so light is always on "top"
 - randomly lit sections
-- "close" (destroy) gate when no more spawns
 - slight adjustments to crosshair pos to account for inexact aiming
 - limit fire rate by limiting spawn time
 - combo (every 5 gives +1 to multiplier)

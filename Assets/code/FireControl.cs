@@ -12,6 +12,9 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
     [SerializeField] private float m_launchRotation = -10f;
 
     public void OnFire(InputAction.CallbackContext context) {
+        if (Time.timeScale == 0f || ScoreManager.instance.IsPaused)
+            return;
+
         if (ScoreManager.instance.IsGameOver || context.started == false)
             return;
 

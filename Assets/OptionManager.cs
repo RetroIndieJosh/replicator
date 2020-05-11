@@ -102,18 +102,18 @@ public class OptionManager : MonoBehaviour, Controls.IAimActions, Controls.IFire
         Value += m_valueInc;
     }
 
+    AsyncOperation m_unloadOp = null;
+
     public void OnFire(InputAction.CallbackContext context) {
         if (context.started == false)
             return;
 
-        if(CurOption == Option.ResetHighScore)
+        if (CurOption == Option.ResetHighScore)
             PlayerPrefs.SetInt("High Score", 0);
+    }
 
-        var controller = GetComponent<Controller>();
-        controller.Controls.Aim.SetCallbacks(null);
-        controller.Controls.Fire.SetCallbacks(null);
-        SceneManager.LoadScene("main");
-        Debug.Log("Start game");
+    private void onFinishedUnloading(AsyncOperation obj) {
+        Time.timeScale = 1f;
     }
 
     private void Start() {
@@ -142,11 +142,22 @@ public class OptionManager : MonoBehaviour, Controls.IAimActions, Controls.IFire
                 m_optionValue.text = m_value == 0 ? "UP IS UP" : "UP IS DOWN";
                 break;
             case Option.ResetHighScore:
-                m_optionValue.text = "Press FIRE to RESET high score AND start new game";
+                m_optionValue.text = "Press FIRE to RESET high score (this cannot be undone)";
                 break;
             default:
                 break;
         }
+
+        if(ScoreManager.instance.PausePressedAndReleased)
+            ReturnToGame();
+    }
+
+    private void ReturnToGame() {
+        var controller = GetComponent<Controller>();
+        controller.Controls.Aim.SetCallbacks(null);
+        controller.Controls.Fire.SetCallbacks(null);
+        m_unloadOp = SceneManager.UnloadSceneAsync("title");
+        m_unloadOp.completed += onFinishedUnloading;
     }
 
     private void LoadOption(int a_default) {
