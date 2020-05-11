@@ -1879,7 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_scoreDisplay: {fileID: 1993730902}
   m_scorePerKill: 1
-  m_chargeForWave: 5
+  m_chargeForWave: 0
   m_enemySpawner: {fileID: 2134322835}
   m_onWaveEnd:
     m_PersistentCalls:
