@@ -1,31 +1,31 @@
 CRITICAL
-- pause menu for options (not just in title)
-- player info: how to control menus
+- every wave the same amount of time, with time between spawns adjusted accordingly
 - player info: how to play game
-- player info: did I get a high score? on game over
+- player info: did I get a high score? on game over & center game over text
 - implement sensitivity options
 - dump back to title after game over
-- limit fire speed
+- limit fire rate by limiting spawn time
 - wave transition: fade? light?
 - disable energy weapon past gate
 - option: max pieces
 - implement max pieces
 
 EXTRA
-- game over music
+- sound: click for when trying to fire too quickly
+- sound: charge down (got past)
+- sound: game over / music
+- sound: different hit for energy weapon
+- sound: wave start (through gate)
+- sound: gate deactivation
+- sound: gate activation
 - "next wave starting" message 
-- rotate so light is always on "top"
+- rotate so repli light is always on "top"
 - randomly lit sections
 - slight adjustments to crosshair pos to account for inexact aiming
-- limit fire rate by limiting spawn time
 - combo (every 5 gives +1 to multiplier)
 - auto roll replis to make it look like they're moving
 - flash when repli hit
-- better looking ARW
-        - rotating electricity translucent
-- sound: ARW 
 - end of wave, turn around and go through end gate (animated)
-- sound: go through gate
 - splitter repli: when hit, splits into two smaller ones
 - revival: a force collecting dormant pieces to reform a repli
 - queen: "boss" at the gate with a countdown to destroy

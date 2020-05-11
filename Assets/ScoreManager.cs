@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
+    [SerializeField] private bool m_pauseOnStart = false;
     [SerializeField] private TextMeshProUGUI m_scoreDisplay = null;
     [SerializeField] private int m_scorePerKill = 1;
     [SerializeField] private int m_chargeForWave = 10;
@@ -56,7 +57,6 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private float m_timeSinceWaveEndSec = 0f;
     private int m_highScore = 0;
-
 
     public void AllSpawned() {
         m_allSpawned = true;
@@ -119,7 +119,8 @@ public class ScoreManager : Singleton<ScoreManager>
             m_audioSourceList[0].volume = 1f;
         }
 
-        Pause();
+        if (m_pauseOnStart)
+            Pause();
     }
 
     AsyncOperation m_pauseMenuOp = null;
@@ -201,8 +202,10 @@ public class ScoreManager : Singleton<ScoreManager>
         }
 
         var health = 100 - Mathf.FloorToInt(m_enemiesThrough * 100f / m_allowedPastCount);
+        var chargePercent = Mathf.FloorToInt(m_charge * 100f / m_chargeForWave);
         m_scoreDisplay.text = $"Wave {m_wave} / Score {m_score} (HI {m_highScore})\n"
-            + $"{health}%" + (m_charge > m_chargeForWave ? "CHARGED" : "");
+            + $"Health {health}\n"
+            + $"Charge {chargePercent}";
     }
 
     private void GameOver() {

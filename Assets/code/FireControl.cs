@@ -26,9 +26,12 @@ public class FireControl : MonoBehaviour, Controls.IFireActions
             return;
         }
 
+        var bullet = GetComponent<Spawner>().SpawnNext();
+        if (bullet == null)
+            return;
+
         AudioSource.PlayClipAtPoint(ScoreManager.instance.LaunchSound, transform.position);
 
-        var bullet = GetComponent<Spawner>().SpawnNext();
         var origin = transform.position + transform.forward * Camera.main.nearClipPlane * 1.1f;
         //var origin = transform.position - Vector3.forward * 2f;
         var dir = Quaternion.AngleAxis(m_launchRotation, Vector3.right) * transform.forward;

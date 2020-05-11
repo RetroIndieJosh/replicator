@@ -1860,7 +1860,8 @@ MonoBehaviour:
   - {fileID: 7687424197727522673, guid: ef81c8df8555ce54584e1807578ee8ee, type: 3}
   MaxTotal: 10
   m_spawnRadius: 0
-  m_secBetweenSpawns: 0
+  m_secBetweenSpawns: 1
+  m_autoSpawn: 0
   m_initialDelaySec: 0
   m_onFinished:
     m_PersistentCalls:
@@ -1877,9 +1878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe209c63cf28f0c439102061fb3cc87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pauseOnStart: 0
   m_scoreDisplay: {fileID: 1993730902}
   m_scorePerKill: 1
-  m_chargeForWave: 0
+  m_chargeForWave: 4
   m_enemySpawner: {fileID: 2134322835}
   m_onWaveEnd:
     m_PersistentCalls:
@@ -2262,6 +2264,7 @@ MonoBehaviour:
   MaxTotal: 10
   m_spawnRadius: 4
   m_secBetweenSpawns: 3
+  m_autoSpawn: 1
   m_initialDelaySec: 4
   m_onFinished:
     m_PersistentCalls:
